@@ -29,12 +29,12 @@ install_dependencies() {
  log "EXEC" "Обновление пакетов"
  apt update
  log "EXEC" "Установка зависимостей"
- apt install ca-certificates curl
+ apt install ca-certificates curl -y
  add_keys
  add_repository
  apt update
  log "EXEC" "Установка Docker"
- apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+ apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
  log "EXEC" "Скачивание образа"
 
 }
