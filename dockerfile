@@ -3,8 +3,8 @@ FROM teddysun/xray:latest
 
 WORKDIR /app
 COPY . .
-RUN rm /etc/xray/config_new.json
-COPY config.json /etc/xray/config_new.json
+RUN rm /etc/xray/config.json
+COPY config_new.json /etc/xray/config.json
 
 
 CMD [ "/usr/bin/xray" ]
