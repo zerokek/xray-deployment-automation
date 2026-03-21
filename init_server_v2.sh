@@ -71,3 +71,4 @@ main() {
     init_proxy
     init_docker
 }
+main
