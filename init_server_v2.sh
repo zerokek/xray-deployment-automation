@@ -5,9 +5,9 @@ SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 docker_gpg_link= "https://download.docker.com/linux/debian/gpg"
 warp_proxy_gpg_link="https://pkg.cloudflareclient.com/pubkey.gpg"
 keyrings_warp_folder_path="/usr/share/keyrings/"
-keyrings_warp_key_path="$keyrings_warp_folder_path/cloudflare-warp-archive-keyring.gpg"
+keyrings_warp_key_path="${keyrings_warp_folder_path}/cloudflare-warp-archive-keyring.gpg"
 keyrings_docker_folder_path="/etc/apt/keyrings"
-keyrings_docker_key_path="$keyrings_folder_path/docker.asc"
+keyrings_docker_key_path="${keyrings_folder_path}/docker.asc"
 
 
 log() {
@@ -17,11 +17,11 @@ log() {
 }
 create_keyrings() {
  log "EXEC" "Создаем папку для ключей и выдаем права"
- install -m 0755 -d $keyrings_folder_path
+ install -m 0755 -d "$keyrings_folder_path"
  log "EXEC" "Скачиваем ключи и добавляем в папку"
- curl -fsSL $docker_gpg_link -o $keyrings_docker_key_path
- curl -fsSL $warp_proxy_gpg_link | gpg --yes --dearmor --output $keyrings_warp_key_path
- chmod a+r $keyrings_docker_key_path
+ curl -fsSL "$docker_gpg_link" -o "$keyrings_docker_key_path"
+ curl -fsSL "$warp_proxy_gpg_link" | gpg --yes --dearmor --output "$keyrings_warp_key_path"
+ chmod a+r "$keyrings_docker_key_path"
 }
 
 add_repository() {
@@ -56,7 +56,7 @@ init_docker() {
 }
 init_dnscrypt_proxy() {
   dnscrypt_proxy_config= "${SRC}/configs/dnscrypt-proxy.toml"
-  mv $dnscrypt_proxy_config /etc/dnscrypt-proxy/dnscrypt-proxy.toml
+  mv "$dnscrypt_proxy_config" /etc/dnscrypt-proxy/dnscrypt-proxy.toml
   systemctl restart dnscrypt-proxy
   systemctl status dnscrypt-proxy
   echo "nameserver 127.0.2.1" | tee /etc/resolvconf/resolv.conf.d/head
