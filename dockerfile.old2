@@ -1,0 +1,9 @@
+FROM teddysun/xray:latest
+
+COPY . .
+
+ARG CONFIG_FILE=config-xhttp.json
+RUN rm -f /etc/xray/config.json
+COPY ${CONFIG_FILE} /etc/xray/config.json
+
+CMD ["/usr/bin/xray"]

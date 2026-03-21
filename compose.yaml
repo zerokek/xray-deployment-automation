@@ -1,0 +1,27 @@
+
+x-common: &xray-common
+  image: teddysun/xray:latest
+  restart: always
+  command: ["/usr/bin/xray", "-config", "/etc/xray/config.json"]
+
+services:
+  xray_xhttp:
+    <<: *xray-common
+    ports:
+      - "2081:8443"
+    volumes:
+      - ./configs/config-xhttp.json:/etc/xray/config.json:ro
+
+  xray_tcp:
+    <<: *xray-common
+    ports:
+      - "2082:8443"
+    volumes:
+      - ./configs/config-tcp.json:/etc/xray/config.json:ro
+
+  xray_warp:
+    <<: *xray-common
+    ports:
+      - "2083:8443"
+    volumes:
+      - ./configs/config-warp.json:/etc/xray/config.json:ro

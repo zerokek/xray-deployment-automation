@@ -1,0 +1,53 @@
+{
+  "log": { "loglevel": "warning" },
+
+  "inbounds": [
+    {
+      "tag": "vless-xhttp",
+      "listen": "0.0.0.0",
+      "port": 8443,
+      "protocol": "vless",
+      "settings": {
+        "clients": [{ "id": "c2da3dab-2790-4544-8c53-53be658cbec2" }],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "xhttpSettings": {
+          "path": "/download",
+          "mode": "auto",
+          "noGRPCHeader": true,
+          "scMaxEachPostBytes": 1000000,
+          "scMaxBufferedPosts": 30,
+          "xPaddingBytes": "100-1000"
+        }
+      },
+      "sniffing": {
+        "enabled": false
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "socks",
+      "tag": "warp",
+      "settings": {
+        "servers": [{ "address":"host.docker.internal", "port": 40000 }]
+      }
+    },
+    {
+      "protocol": "freedom",
+      "tag": "direct"
+    }
+  ],
+  "routing": {
+    "domainStrategy": "AsIs",
+    "rules": [
+      {
+        "type": "field",
+        "outboundTag": "warp",
+        "network": "tcp,udp"
+      }
+    ]
+  }
+}
