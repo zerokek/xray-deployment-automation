@@ -71,9 +71,9 @@ main() {
     update_and_install_package
     init_proxy
     init_docker
-    if [[ $1 == "custom_dns=true" ]]; then
+    if [[ "$1" == "custom_dns=true" ]]; then
         init_dnscrypt_proxy
     fi
     
 }
-main
+main "$@"
