@@ -35,7 +35,7 @@ add_repository() {
 update_and_install_package() {
     log "EXEC" "Обновляем пакеты"
     apt update
-    apt install ca-certificates curl gpg vim resolvconf dnscrypt-proxy -y
+    apt install ca-certificates curl gpg vim  -y
     create_keyrings
     add_repository
     apt update
@@ -56,6 +56,7 @@ init_docker() {
 }
 init_dnscrypt_proxy() {
   log "EXEC" "Инициализируем приватный dns"
+  apt install resolvconf dnscrypt-proxy -y
   mv "$(pwd)/configs/dnscrypt-proxy.toml" /etc/dnscrypt-proxy/dnscrypt-proxy.toml
   systemctl restart dnscrypt-proxy
   systemctl status dnscrypt-proxy
