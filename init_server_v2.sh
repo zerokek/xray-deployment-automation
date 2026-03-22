@@ -55,8 +55,7 @@ init_docker() {
     log "INFO" "Сборка закончена"
 }
 init_dnscrypt_proxy() {
-  dnscrypt_proxy_config= "${SRC}/configs/dnscrypt-proxy.toml"
-  mv "$dnscrypt_proxy_config" /etc/dnscrypt-proxy/dnscrypt-proxy.toml
+  mv "$(pwd)/configs/dnscrypt-proxy.toml" /etc/dnscrypt-proxy/dnscrypt-proxy.toml
   systemctl restart dnscrypt-proxy
   systemctl status dnscrypt-proxy
   echo "nameserver 127.0.2.1" | tee /etc/resolvconf/resolv.conf.d/head
