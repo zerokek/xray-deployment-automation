@@ -69,6 +69,8 @@ main() {
     update_and_install_package
     init_proxy
     init_docker
-    init_dnscrypt_proxy
+    if [ $1 = "custom_dns=true" ]; then
+        init_dnscrypt_proxy
+    fi
 }
 main
