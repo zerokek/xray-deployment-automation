@@ -1,8 +1,8 @@
 # Empty listen_addresses to use systemd socket activation
 listen_addresses = []
-server_names = ['dns.zerokek']
-[static.'dns.zerokek']
-stamp = 'sdns://AgcAAAAAAAAAAAAOZG5zLnplcm9rZWsucnUKL2Rucy1xdWVyeQ'
+server_names = ['dns2.zerokek']
+[static.'dns2.zerokek']
+stamp = 'sdns://AgcAAAAAAAAAAAAPZG5zMi56ZXJva2VrLnJ1Ci9kbnMtcXVlcnk'
 [query_log]
   file = '/var/log/dnscrypt-proxy/query.log'
 
