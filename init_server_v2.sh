@@ -43,10 +43,10 @@ update_and_install_package() {
 }
 init_proxy() {
     log "EXEC" "Инициализация прокси warp"
-    echo y | warp-cli registration new
-    warp-cli mode proxy
-    warp-cli proxy port 40000
-    warp-cli connect
+    warp-cli --accept-tos registration new
+    warp-cli --accept-tos mode proxy
+    warp-cli --accept-tos proxy port 40000
+    warp-cli --accept-tos connect
 }
 
 init_docker() {
