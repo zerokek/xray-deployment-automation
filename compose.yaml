@@ -2,7 +2,7 @@
 x-common: &xray-common
   image: teddysun/xray:latest
   restart: always
-  command: ["/usr/bin/xray"]
+  command: ["-config", "/etc/xray/config.json"]
 
 services:
   xray_xhttp:
