@@ -19,18 +19,18 @@ create_keyrings() {
  log "EXEC" "Создаем папку для ключей и выдаем права"
  install -m 0755 -d "$keyrings_folder_path"
  log "EXEC" "Скачиваем ключи и добавляем в папку"
- curl -fsSL "$docker_gpg_link" -o "$keyrings_docker_key_path"
- curl -fsSL "$warp_proxy_gpg_link" | gpg --yes --dearmor --output "$keyrings_warp_key_path"
- chmod a+r "$keyrings_docker_key_path"
+ curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+ curl -fsSL https://pkg.cloudflareclient.com/pubkey.gpg | gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
+ chmod a+r /etc/apt/keyrings/docker.asc
 }
 
 add_repository() {
     log "EXEC" "Добавляем репозиторий"
     echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=${keyrings_docker_key_path}] https://download.docker.com/linux/$(. /etc/os-release && echo "$ID") \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/$(. /etc/os-release && echo "$ID") \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
   tee /etc/apt/sources.list.d/docker.list > /dev/null
-  echo "deb [signed-by=${keyrings_warp_key_path}] https://pkg.cloudflareclient.com/ $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/cloudflare-client.list
+  echo "deb [signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/cloudflare-client.list
 }
 update_and_install_package() {
     log "EXEC" "Обновляем пакеты"
