@@ -70,7 +70,8 @@ main() {
     init_proxy
     init_docker
     if [ $1 = "custom_dns=true" ]; then
-        init_dnscrypt_proxy
+         init_dnscrypt_proxy
     fi
+    
 }
 main
