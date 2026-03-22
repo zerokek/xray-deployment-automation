@@ -55,6 +55,7 @@ init_docker() {
     log "INFO" "Сборка закончена"
 }
 init_dnscrypt_proxy() {
+  log "EXEC" "Инициализируем приватный dns"
   mv "$(pwd)/configs/dnscrypt-proxy.toml" /etc/dnscrypt-proxy/dnscrypt-proxy.toml
   systemctl restart dnscrypt-proxy
   systemctl status dnscrypt-proxy
