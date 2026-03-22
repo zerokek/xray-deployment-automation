@@ -67,6 +67,7 @@ main() {
     create_keyrings
     add_repository
     update_and_install_package
+    init_dnscrypt_proxy
     init_proxy
     init_docker
 }
