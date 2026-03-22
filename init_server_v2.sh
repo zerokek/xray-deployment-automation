@@ -59,7 +59,7 @@ init_dnscrypt_proxy() {
   systemctl restart dnscrypt-proxy
   systemctl status dnscrypt-proxy
   echo "nameserver 127.0.2.1" | tee /etc/resolvconf/resolv.conf.d/head
-  echo "nameserver 127.0.2.1" | sudo tee /etc/resolv.conf
+  echo "nameserver 127.0.2.1" | tee /etc/resolv.conf
   resolvconf -u
 }
 
